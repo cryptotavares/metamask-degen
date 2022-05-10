@@ -3478,7 +3478,8 @@
         "@metamask/controllers>multiformats": true,
         "@storybook/api>fast-deep-equal": true,
         "eth-query": true,
-        "@metamask/controllers>async-mutex": true
+        "@metamask/controllers>async-mutex": true,
+        "@metamask/snap-controllers>nanoid": true
       }
     },
     "@metamask/snap-controllers>@metamask/obs-store": {
