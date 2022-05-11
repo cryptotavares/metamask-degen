@@ -338,7 +338,7 @@ export default class GasDisplay extends Component {
                         onClick={showAccountDetails}
                         key="receive-button"
                       >
-                        {t('receive')}
+                        {t('deposit')}
                       </Button>,
                     ])}
                   </Typography>
@@ -353,7 +353,7 @@ export default class GasDisplay extends Component {
                         onClick={showAccountDetails}
                         key="receive-button"
                       >
-                        {t('receive')}
+                        {t('deposit')}
                       </Button>,
                     ])}
                   </Typography>
