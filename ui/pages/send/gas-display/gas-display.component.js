@@ -47,6 +47,7 @@ export default class GasDisplay extends Component {
     nativeCurrency: PropTypes.string,
     chainId: PropTypes.string,
     showAccountDetails: PropTypes.func,
+    gasError: PropTypes.string,
   };
 
   static contextTypes = {
@@ -78,6 +79,7 @@ export default class GasDisplay extends Component {
       nativeCurrency,
       chainId,
       showAccountDetails,
+      gasError,
     } = this.props;
     const { t } = this.context;
 
@@ -279,13 +281,12 @@ export default class GasDisplay extends Component {
 
     return (
       <>
-        {renderGasDetailsItem}
         <div className="gas-display">
           <TransactionDetail
             userAcknowledgedGasMissing={false}
             rows={[
               renderGasDetailsItem(),
-              !this.supportsEIP1559V2 && (
+              !this.supportsEIP1559V2 && gasError && (
                 <TransactionDetailItem
                   key="total-item"
                   detailTitle={t('total')}
@@ -314,7 +315,7 @@ export default class GasDisplay extends Component {
             />
           ) : null}
         </div>
-        {!this.supportsEIP1559V2 && (
+        {!this.supportsEIP1559V2 && gasError && (
           <div className="confirm-approve-content__warning">
             <ActionableMessage
               message={
