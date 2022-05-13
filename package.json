@@ -58,7 +58,7 @@
     "mozilla-lint": "addons-linter dist/firefox",
     "devtools:react": "react-devtools",
     "devtools:redux": "remotedev --hostname=localhost --port=8000",
-    "start:dev": "concurrently -k -n build,react,redux yarn:start yarn:devtools:react yarn:devtools:redux",
+    "start:dev": "concurrently -k -n build,react,redux yarn:start",
     "announce": "node development/announcer.js",
     "storybook": "start-storybook -p 6006 -c .storybook -s ./app,./.storybook/images",
     "storybook:test": "jest --config=./jest.stories.config.js",

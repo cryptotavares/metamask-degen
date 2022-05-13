@@ -16,6 +16,7 @@ export default function InfoTooltip({
   position = '',
   containerClassName,
   wrapperClassName,
+  children,
   wide,
   iconFillColor = 'var(--color-icon-default)',
 }) {
@@ -34,7 +35,7 @@ export default function InfoTooltip({
         html={contentText}
         theme={wide ? 'tippy-tooltip-wideInfo' : 'tippy-tooltip-info'}
       >
-        <InfoTooltipIcon fillColor={iconFillColor} />
+        {children || <InfoTooltipIcon fillColor={iconFillColor} />}
       </Tooltip>
     </div>
   );

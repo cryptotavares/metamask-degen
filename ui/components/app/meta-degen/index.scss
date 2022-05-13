@@ -1,0 +1,22 @@
+.metadegen{
+    & img{
+        width: 100%;
+    }
+    cursor: pointer;
+    z-index: 5;
+    max-width: 79px;
+}
+
+.metadegen.move{
+    position: fixed;
+    animation: moveAround 6s linear infinite;
+    
+}
+
+@keyframes moveAround {
+  0% { top: 10%;right: 0; width: 50px; }
+  30% { top: 70%;right: 70%; width: 150px;}
+  50% { top: 10%; right: 70%; width: 50px;}
+  70% { top: 70%; right: 0; width: 150px;}
+  100% { top: 10%; right: 0; width: 50px; }
+}
