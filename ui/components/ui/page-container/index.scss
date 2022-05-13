@@ -56,11 +56,12 @@
     justify-content: center;
     border-top: 1px solid var(--color-border-muted);
     flex: 0 0 auto;
-
+    position: relative;
     footer {
       display: flex;
       flex-flow: row;
-      justify-content: center;
+      justify-content: space-evenly;
+      align-items: center;
       padding: 16px;
       flex: 0 0 auto;
     }
@@ -85,7 +86,7 @@
   }
 
   &__footer-button {
-    margin-right: 16px;
+    margin-right: 0;
 
     &:last-of-type {
       margin-right: 0;

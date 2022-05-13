@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Button from '../../button';
+import MetaDegen from '../../../app/meta-degen';
 
 export default class PageContainerFooter extends Component {
   static propTypes = {
@@ -57,19 +58,23 @@ export default class PageContainerFooter extends Component {
             </Button>
           )}
 
-          <Button
-            type={submitButtonType || 'primary'}
-            large={buttonSizeLarge}
-            className={classnames(
-              'page-container__footer-button',
-              footerButtonClassName,
+          <MetaDegen>
+            {(isDegen) => (
+              <Button
+                type={submitButtonType || 'primary'}
+                large={buttonSizeLarge}
+                className={classnames(
+                  'page-container__footer-button',
+                  footerButtonClassName,
+                )}
+                disabled={disabled}
+                onClick={(e) => onSubmit(e)}
+                data-testid="page-container-footer-next"
+              >
+                {isDegen ? 'YOLOOO!' : submitText || this.context.t('next')}
+              </Button>
             )}
-            disabled={disabled}
-            onClick={(e) => onSubmit(e)}
-            data-testid="page-container-footer-next"
-          >
-            {submitText || this.context.t('next')}
-          </Button>
+          </MetaDegen>
         </footer>
 
         {children && (
