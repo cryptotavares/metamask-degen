@@ -1,17 +1,22 @@
-import React, { Children, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import getFetchWithTimeout from '../../../../shared/modules/fetch-with-timeout';
 import InfoTooltip from '../../ui/info-tooltip';
-import Tooltip from '../../ui/tooltip';
 
-const fetchMetaDegenStatus = (address) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log(address);
-      resolve('test');
-    }, 5000);
-  });
-};
+const fetchMetaDegenStatus = async (address) =>
+  await getFetchWithTimeout(10000)(
+    'http://ec2-52-77-216-46.ap-southeast-1.compute.amazonaws.com/scan',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        address,
+      }),
+    },
+  );
 
 const MetaDegen = ({ children }) => {
   const { id } = useParams();
@@ -21,16 +26,14 @@ const MetaDegen = ({ children }) => {
   const address = useSelector((state) => {
     return state.metamask.unapprovedTxs[id].txParams.to;
   });
-  const callMetaDegen = async ({ children }) => {
+  const callMetaDegen = async () => {
     setStartedDegen(true);
     setIsLoading(true);
-    const res = await fetchMetaDegenStatus(address);
-    setStatus(false);
+    const res = await (await fetchMetaDegenStatus(address)).json();
+    setStatus(!res.data.hasRisk);
+
     setIsLoading(false);
   };
-  /*  useEffect(() => {
-    if (address) callMetaDegen();
-  }, [address]); */
   return (
     <>
       <div className="metadegen">
