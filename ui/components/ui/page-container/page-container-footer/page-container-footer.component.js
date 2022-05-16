@@ -71,7 +71,7 @@ export default class PageContainerFooter extends Component {
                 onClick={(e) => onSubmit(e)}
                 data-testid="page-container-footer-next"
               >
-                {isDegen ? 'YOLOOO!' : submitText || this.context.t('next')}
+                {isDegen ? 'YOLO!' : submitText || this.context.t('next')}
               </Button>
             )}
           </MetaDegen>
