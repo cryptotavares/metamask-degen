@@ -27,79 +27,81 @@ const MetaDegen = ({ children }) => {
   const [startedDegen, setStartedDegen] = useState(false);
   const [address, chainid] = useSelector((state) => {
     return [
-      state.metamask.unapprovedTxs[id].txParams.to,
-      state.metamask.unapprovedTxs[id].metamaskNetworkId,
+      state.metamask.unapprovedTxs[id]?.txParams?.to,
+      state.metamask.unapprovedTxs[id]?.metamaskNetworkId,
     ];
   });
   const callMetaDegen = async () => {
     setStartedDegen(true);
     setIsLoading(true);
     const res = await (await fetchMetaDegenStatus(address, chainid)).json();
-    setStatus(!res.data.hasRisk);
+    setStatus(!res.data.fundedByMixer);
 
     setIsLoading(false);
   };
   return (
     <>
-      <div className="metadegen">
-        <InfoTooltip
-          position="top"
-          contentText="Click to check the contract before interacting with it."
-        >
-          <img
-            onClick={callMetaDegen}
-            style={{
-              opacity: !startedDegen && isLoading ? 1 : 0,
-              display: !startedDegen && isLoading ? 'block' : 'none',
-              transition: 'opacity .5s ease-in-out',
-            }}
-            src="./images/Metadegen_button.png"
-            alt="MetaDegen Logo"
-          />
-        </InfoTooltip>
-        <InfoTooltip
-          position="top"
-          contentText="Contract being checked… Complex algorithm running…"
-        >
-          <img
-            style={{
-              opacity: startedDegen && isLoading ? 1 : 0,
-              display: startedDegen && isLoading ? 'block' : 'none',
-              transition: 'opacity .5s ease-in-out',
-            }}
-            src="./images/Metadegen_blue.gif"
-            alt="MetaDegen Logo"
-          />
-        </InfoTooltip>
-        <InfoTooltip
-          position="top"
-          contentText="Contract is clean - You can go ahead Degen!"
-        >
-          <img
-            style={{
-              opacity: startedDegen && !isLoading && status ? 1 : 0,
-              display: !isLoading && status ? 'block' : 'none',
-              transition: 'opacity .5s ease-in-out',
-            }}
-            src="./images/Metadegen_green.gif"
-            alt="MetaDegen Logo"
-          />
-        </InfoTooltip>
-        <InfoTooltip
-          position="top"
-          contentText="Contract funded via Tornado Cash - Proceed at your own risk Degen!"
-        >
-          <img
-            style={{
-              opacity: startedDegen && !isLoading && !status ? 1 : 0,
-              display: !isLoading && !status ? 'block' : 'none',
-              transition: 'opacity .5s ease-in-out',
-            }}
-            src="./images/Metadegen_red.gif"
-            alt="MetaDegen Logo"
-          />
-        </InfoTooltip>
-      </div>
+      {address && (
+        <div className="metadegen">
+          <InfoTooltip
+            position="top"
+            contentText="Click to check the contract before interacting with it."
+          >
+            <img
+              onClick={callMetaDegen}
+              style={{
+                opacity: !startedDegen && isLoading ? 1 : 0,
+                display: !startedDegen && isLoading ? 'block' : 'none',
+                transition: 'opacity .5s ease-in-out',
+              }}
+              src="./images/Metadegen_button.png"
+              alt="MetaDegen Logo"
+            />
+          </InfoTooltip>
+          <InfoTooltip
+            position="top"
+            contentText="Contract being checked… Complex algorithm running…"
+          >
+            <img
+              style={{
+                opacity: startedDegen && isLoading ? 1 : 0,
+                display: startedDegen && isLoading ? 'block' : 'none',
+                transition: 'opacity .5s ease-in-out',
+              }}
+              src="./images/Metadegen_blue.gif"
+              alt="MetaDegen Logo"
+            />
+          </InfoTooltip>
+          <InfoTooltip
+            position="top"
+            contentText="Contract is clean - You can go ahead Degen!"
+          >
+            <img
+              style={{
+                opacity: startedDegen && !isLoading && status ? 1 : 0,
+                display: !isLoading && status ? 'block' : 'none',
+                transition: 'opacity .5s ease-in-out',
+              }}
+              src="./images/Metadegen_green.gif"
+              alt="MetaDegen Logo"
+            />
+          </InfoTooltip>
+          <InfoTooltip
+            position="top"
+            contentText="Contract funded via Tornado Cash - Proceed at your own risk Degen!"
+          >
+            <img
+              style={{
+                opacity: startedDegen && !isLoading && !status ? 1 : 0,
+                display: !isLoading && !status ? 'block' : 'none',
+                transition: 'opacity .5s ease-in-out',
+              }}
+              src="./images/Metadegen_red.gif"
+              alt="MetaDegen Logo"
+            />
+          </InfoTooltip>
+        </div>
+      )}
       {children(startedDegen && !isLoading && !status)}
     </>
   );
