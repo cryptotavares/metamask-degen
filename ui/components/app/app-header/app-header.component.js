@@ -107,7 +107,7 @@ export default class AppHeader extends PureComponent {
     return (
       <div className="app-header">
         <div className="app-header__contents">
-          {/* <MetaFoxLogo
+          <MetaFoxLogo
             unsetIconHeight
             onClick={async () => {
               if (onClick) {
@@ -115,8 +115,8 @@ export default class AppHeader extends PureComponent {
               }
               history.push(DEFAULT_ROUTE);
             }}
-          /> */}
-          <img
+          />
+          {/*  <img
             height="30"
             onClick={async () => {
               if (onClick) {
@@ -126,7 +126,7 @@ export default class AppHeader extends PureComponent {
             }}
             style={{ cursor: 'pointer' }}
             src="./images/Metadegen.png"
-          />
+          /> */}
           <div className="app-header__account-menu-container">
             {!hideNetworkIndicator && (
               <div className="app-header__network-component-wrapper">
